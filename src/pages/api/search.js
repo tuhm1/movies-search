@@ -18,16 +18,19 @@ export default async function search(req, res) {
             { term: { 'cast.keyword': { value: query, boost: 2 } } },
         ]
         : [];
-    const filter = [
-        ...(Object.entries(req.body.genres)
-            .filter(([key, value]) => value)
-            .map(([key, value]) => ({ term: { 'genres.keyword': key } }))
-        ),
-        ...(Object.entries(req.body.languages)
-            .filter(([key, value]) => value)
-            .map(([key, value]) => ({ term: { 'languages.keyword': key } }))
-        )
-    ];
+    const filter = [];
+    const genres = Object.entries(req.body.genres)
+        .filter(([key, value]) => value)
+        .map(([key, value]) => key);
+    if (genres.length > 0) {
+        filter.push({ terms: { 'genres.keyword': genres } });
+    }
+    const languages = Object.entries(req.body.languages)
+        .filter(([key, value]) => value)
+        .map(([key, value]) => key);
+    if (languages.length > 0) {
+        filter.push({ terms: { 'languages.keyword': languages } });
+    }
     const searchResult = await client.search({
         index: 'movies',
         body: {
