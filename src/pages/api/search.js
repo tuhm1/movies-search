@@ -44,7 +44,7 @@ export default async function search(req, res) {
             sort: [
                 '_score',
                 { rating: 'desc' },
-                { released_date: 'asc' }
+                { released_date: 'desc' }
             ],
             highlight: {
                 fields: {
