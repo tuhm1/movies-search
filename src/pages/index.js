@@ -197,7 +197,7 @@ function MovieSearchItem({ _source, highlight }) {
       )
     }
     {highlight?.cast
-      ? <div dangerouslySetInnerHTML={{ __html: `<b>Writers</b>: ${highlight.writers}` }} />
+      ? <div dangerouslySetInnerHTML={{ __html: `<b>Cast</b>: ${highlight.cast}` }} />
       : (_source.cast?.length > 0
         && <div><b>Cast</b>: {_source.cast?.map((c, i) =>
           <Fragment key={c}>
