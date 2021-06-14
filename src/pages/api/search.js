@@ -6,7 +6,7 @@ export default async function search(req, res) {
         ? {
             multi_match: {
                 query,
-                fields: ['title^1.2', 'storyline^1.3', 'genres', 'languages', 'directors^1.1', 'writers^1.1', 'cast^1.1']
+                fields: ['title^1.3', 'storyline^1.1', 'genres', 'languages', 'directors^1.2', 'writers^1.2', 'cast^1.2']
             }
         }
         : { match_all: {} };
